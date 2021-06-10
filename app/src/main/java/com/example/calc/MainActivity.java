@@ -2,6 +2,8 @@ package com.example.calc;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -11,12 +13,16 @@ import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
-
+    private ThemeStorage storage;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        storage = new ThemeStorage(this);
+        setTheme(storage.getTheme().getResource());
+
         setContentView(R.layout.activity_main);
         init();
+        setTheme();
     }
 
     public void init(){
@@ -140,4 +146,28 @@ public class MainActivity extends AppCompatActivity {
 
         buttonClean.setOnClickListener(v -> text.setText(null));
     }
+
+    public void setTheme(){
+
+
+        Button btnCustom = findViewById(R.id.buttonCustom);
+        Button btnDefault = findViewById(R.id.buttonDefault);
+
+        btnCustom.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            storage.setTheme(CalcTheme.NIGHT);
+            recreate();
+            }
+        });
+
+        btnDefault.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            storage.setTheme(CalcTheme.DEFAULT);
+            recreate();
+            }
+        });
+    }
+
 }

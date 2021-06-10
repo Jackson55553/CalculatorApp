@@ -18,4 +18,6 @@
     <string name="minus">-</string>
     <string name="point">.</string>
     <string name="equal">=</string>
+    <string name="BtnDefault">Default</string>
+    <string name="customBtn">Custom</string>
 </resources>
